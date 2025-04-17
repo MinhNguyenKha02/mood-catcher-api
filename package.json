@@ -12,6 +12,13 @@
   },
   "devDependencies": {
     "@types/node": "^22.14.1",
-    "nodemon": "^3.1.9"
+    "@types/vosk": "^0.3.1",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {
+    "dev": "nodemon --watch './' --ext ts --exec ts-node app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
   }
 }
