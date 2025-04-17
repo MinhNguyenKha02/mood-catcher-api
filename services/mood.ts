@@ -1,0 +1,1 @@
+// I will build mood cheating detection by AI (fake mood) and mood analysis
