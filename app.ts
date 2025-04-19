@@ -13,6 +13,7 @@ import routes from './routes/index.route'; // Ensure routes/index.ts exists
 // Initialize Express
 const app = express();
 
+
 // Global middleware
 app.use(cors());
 app.use(morgan('dev'));
@@ -41,3 +42,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Mood Catcher API listening at http://localhost:${PORT}`);
 });
+
+export default app;
