@@ -4,7 +4,7 @@ import {Request} from "express";
 import path from 'path';
 import { randomUUID } from 'crypto';
 
-const allowedTypes = ['audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/mp3', 'audio/mp4', 'audio/ogg', 'audio/webm'];
+const allowedTypes = ['audio/wav', 'audio/wave', 'audio/x-wav', 'audio/mpeg', 'audio/mp3', 'audio/mp4', 'audio/ogg', 'audio/webm'];
 
 const storage = multer.diskStorage({
     destination: (_req, _file, cb) => cb(null, 'storage/uploads/'),

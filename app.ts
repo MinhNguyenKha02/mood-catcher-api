@@ -37,10 +37,4 @@ app.use((err: any, _req: any, res: any, _next: any) => {
     res.status(500).json({ message: 'Internal Server Error' });
 });
 
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`🚀 Mood Catcher API listening at http://localhost:${PORT}`);
-});
-
 export default app;

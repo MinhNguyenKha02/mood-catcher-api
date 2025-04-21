@@ -2,13 +2,14 @@
 import fs from 'fs';
 import { Model, Recognizer } from 'vosk';
 import { Readable } from 'stream';
+import * as path from 'path'
 
 // Load environment variables
-const MODEL_PATH = process.env.MODEL_PATH;
-const SAMPLE_RATE = process.env.SAMPLE_RATE;
+const MODEL_PATH = path.resolve(process.env.MODEL_PATH || '');
+const SAMPLE_RATE = path.resolve(process.env.SAMPLE_RATE || '');
 
-if (!MODEL_PATH || !SAMPLE_RATE) {
-    throw new Error('MODEL_PATH and SAMPLE_RATE are not defined in .env');
+if (!fs.existsSync(MODEL_PATH)) {
+    throw new Error(`Model path ${MODEL_PATH} does not exist`);
 }
 
 // Load model once (it's safe to reuse)
