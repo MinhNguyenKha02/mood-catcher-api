@@ -1,8 +1,9 @@
 // middlewares/upload.middleware.ts
 import multer, {FileFilterCallback} from 'multer';
-import {Request} from "express";
+import {Request, Response, NextFunction} from "express";
 import path from 'path';
 import { randomUUID } from 'crypto';
+import {HttpError} from "../utils/errors/httpError.error";
 
 const allowedTypes = ['audio/wav', 'audio/wave', 'audio/x-wav', 'audio/mpeg', 'audio/mp3', 'audio/mp4', 'audio/ogg', 'audio/webm'];
 
@@ -16,7 +17,7 @@ const storage = multer.diskStorage({
 
 const fileFilter = (_req: Request, file: Express.Multer.File, cb:FileFilterCallback ) => {
     if (allowedTypes.includes(file.mimetype)) cb(null, true);
-    else cb(new Error('Unsupported file type'));
+    else cb(new HttpError(415,'Unsupported file type'));
 };
 
 export const upload = multer({
@@ -26,3 +27,11 @@ export const upload = multer({
         fileSize: 10 * 1024 * 1024, // 10MB max
     },
 });
+
+
+export const ensureFileUploaded = (req: Request, res: Response, next: NextFunction) => {
+    if (!req.file) {
+        return next(new HttpError(400, 'No audio file uploaded.'));
+    }
+    next();
+};

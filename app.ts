@@ -32,9 +32,11 @@ app.get('/', (_req, res) => {
 });
 
 // Global error handler
-app.use((err: any, _req: any, res: any, _next: any) => {
-    console.error('❗ Unexpected error:', err);
-    res.status(500).json({ message: 'Internal Server Error' });
+app.use((err:any, req:any, res:any, next:any) => {
+    const status = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    console.error(`[Error] ${status}: ${message}`);
+    res.status(status).json({ error: message });
 });
 
 export default app;

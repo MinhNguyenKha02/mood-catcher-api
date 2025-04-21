@@ -4,14 +4,13 @@ import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import { recognizeSpeech } from '../services/speechTranscribe.service';
 import { ensureVoskWavFormat } from '../utils/convertToWav.util';
+import {HttpError} from "../utils/errors/httpError.error";
 
 export const handleUpload = asyncHandler(async (req: Request, res: Response) => {
     const file = req.file;
-    if (!file) throw new Error('No file uploaded');
+    if (!file) throw new HttpError(400,'No file uploaded');
 
     const wavPath = await ensureVoskWavFormat(file.path);
-
-    console.log(wavPath)
 
     const audioStream = fs.createReadStream(wavPath);
 

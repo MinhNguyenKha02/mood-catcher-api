@@ -13,17 +13,17 @@ describe('POST /api/upload', () => {
         expect(res.body).toHaveProperty('transcript');
     });
 
-    // it('should reject if no file is uploaded', async () => {
-    //     const res = await request(app).post(uploadURL);
-    //
-    //     expect(res.statusCode).toBe(400);
-    // });
-    //
-    // it('should reject unsupported file formats', async () => {
-    //     const res = await request(app)
-    //         .post(uploadURL)
-    //         .attach('audio', path.join(__dirname, 'invalid-file.sh'));
-    //
-    //     expect(res.statusCode).toBe(415); // if you're enforcing MIME type in controller
-    // });
+    it('should reject if no file is uploaded', async () => {
+        const res = await request(app).post(uploadURL);
+
+        expect(res.statusCode).toBe(400);
+    });
+
+    it('should reject unsupported file formats', async () => {
+        const res = await request(app)
+            .post(uploadURL)
+            .attach('audio', path.join(__dirname, 'invalid-file.sh'));
+
+        expect(res.statusCode).toBe(415); // if you're enforcing MIME type in controller
+    });
 });
