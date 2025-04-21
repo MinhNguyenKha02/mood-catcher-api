@@ -50,7 +50,7 @@ export const recognizeSpeech = (audioStream: Readable): Promise<string> => {
                 }
 
                 try {
-                    console.log('[Vosk] Chunk length:', piece.length);
+                    // console.log('[Vosk] Chunk length:', piece.length);
                     if (recognizer.acceptWaveform(piece)) {
                         const result = recognizer.result();
                         if (result.text) {
